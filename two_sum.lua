@@ -1,5 +1,6 @@
--- http://lua-users.org/wiki/FileInputOutput
+hashset = require("hashset")
 
+-- http://lua-users.org/wiki/FileInputOutput
 -- see if the file exists
 function file_exists(file)
   local f = io.open(file, "rb")
@@ -27,17 +28,6 @@ local lines = lines_from(file)
 --[[   print('line[' .. k .. ']', v) ]]
 --[[ end ]]
 
-function addToSet(set, key)
-    set[key] = true
-end
-
-function removeFromSet(set, key)
-    set[key] = nil
-end
-
-function setContains(set, key)
-    return set[key] ~= nil
-end
 
 function two_sum(nums_str, target)
     --[[ print(nums) ]]
@@ -51,10 +41,10 @@ function two_sum(nums_str, target)
 
     for _, num in ipairs(nums) do
         complement = target - num
-        if setContains(seen, complement) then
+        if hashset.setContains(seen, complement) then
             print(complement, num)
         else
-            addToSet(seen, num)
+            hashset.addToSet(seen, num)
         end
     end
 end
